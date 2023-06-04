@@ -17,7 +17,7 @@ const User = new Schema({
     loginOTPforNumber:String,
     loginOTPforEmail:String,
     isLoginNumberVerified :{type: Boolean,default: false},
-    isLoginEmailVerified :{type: Boolean,default: false},
+    // isLoginEmailVerified :{type: Boolean,default: false},
     products:[]
 
     

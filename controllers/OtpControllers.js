@@ -23,7 +23,7 @@ export const otpRegistration = async (req, res) => {
             otpForNumber: codeForNumber,
             otpForEmail: codeForEmail,
             isNumberVerified: false,
-            isEmailVerified: false
+            // isEmailVerified: false
 
         })
         await user.save();
@@ -99,8 +99,8 @@ export const otpLogin = async (req, res) => {
         const codeForNum = uuidv4();
         const codeForEmail = uuidv4();
         // crate another code
-        const updateUser = await Users.findByIdAndUpdate({ _id: userId }, { loginOTPforNumber: codeForNum ,loginOTPforEmail:codeForEmail,
-            isLoginNumberVerified: false ,isLoginEmailVerified:false}).exec(); // update the 2 scheamas
+        const updateUser = await Users.findByIdAndUpdate({ _id: userId }, { loginOTPforNumber: codeForNum ,
+            isLoginNumberVerified: false }).exec(); // update the 2 scheamas
 
             await updateUser.save();
       
@@ -137,28 +137,28 @@ export const loginOTPchechForNumber = async (req, res) => {
 
 
 
-export const loginOTPchechForEmail = async (req, res) => {
-    try {
-        const { loginOTPforEmail, number, email } = req.body;
-        if (!loginOTPforEmail) return res.send("Otp not found!")
-        if (!number) return res.send("Number not found!")
-        if (!email) return res.send("Email not found!")
+// export const loginOTPchechForEmail = async (req, res) => {
+//     try {
+//         const { loginOTPforEmail, number, email } = req.body;
+//         if (!loginOTPforEmail) return res.send("Otp not found!")
+//         if (!number) return res.send("Number not found!")
+//         if (!email) return res.send("Email not found!")
 
-        const user = await Users.find({ number, email }).exec();
+//         const user = await Users.find({ number, email }).exec();
 
-        if (user[0].loginOTPforEmail == loginOTPforEmail) {
+//         if (user[0].loginOTPforEmail == loginOTPforEmail) {
 
-            const user = await Users.findOneAndUpdate({ email }, { isLoginEmailVerified: true }).exec();
-            await user.save();
+//             const user = await Users.findOneAndUpdate({ email }, { isLoginEmailVerified: true }).exec();
+//             await user.save();
 
-            return res.send("Login Successful through email")
-        }
-        return res.send('Otp is wrong!');
-    } catch (error) {
-        return res.send(error)
-    }
+//             return res.send("Login Successful through email")
+//         }
+//         return res.send('Otp is wrong!');
+//     } catch (error) {
+//         return res.send(error)
+//     }
     
-}
+// }
 
 
 //buy products
