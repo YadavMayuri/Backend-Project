@@ -137,28 +137,28 @@ export const loginOTPchechForNumber = async (req, res) => {
 
 
 
-// export const loginOTPchechForEmail = async (req, res) => {
-//     try {
-//         const { loginOTPforEmail, number, email } = req.body;
-//         if (!loginOTPforEmail) return res.send("Otp not found!")
-//         if (!number) return res.send("Number not found!")
-//         if (!email) return res.send("Email not found!")
+export const loginOTPchechForEmail = async (req, res) => {
+    try {
+        const { loginOTPforEmail, number, email } = req.body;
+        if (!loginOTPforEmail) return res.send("Otp not found!")
+        if (!number) return res.send("Number not found!")
+        if (!email) return res.send("Email not found!")
 
-//         const user = await Users.find({ number, email }).exec();
+        const user = await Users.find({ number, email }).exec();
 
-//         if (user[0].loginOTPforEmail == loginOTPforEmail) {
+        if (user[0].loginOTPforEmail == loginOTPforEmail) {
 
-//             const user = await Users.findOneAndUpdate({ email }, { isLoginEmailVerified: true }).exec();
-//             await user.save();
+            const user = await Users.findOneAndUpdate({ email }, { isLoginEmailVerified: true }).exec();
+            await user.save();
 
-//             return res.send("Login Successful through email")
-//         }
-//         return res.send('Otp is wrong!');
-//     } catch (error) {
-//         return res.send(error)
-//     }
+            return res.send("Login Successful through email")
+        }
+        return res.send('Otp is wrong!');
+    } catch (error) {
+        return res.send(error)
+    }
     
-// }
+}
 
 
 //buy products
@@ -186,7 +186,7 @@ export const buyProducts = async(req, res) =>{
                 
             }}).exec();
             console.log(updateUser);
-            // { products :[{pname:pname, price:price, image:image}]}).exec(); 
+           
 
             await updateUser.save();
       
