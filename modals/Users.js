@@ -3,7 +3,7 @@ import { Schema } from "mongoose";
 import { object } from "webidl-conversions";
 
 const User = new Schema({
-    // name : String,
+    name : String,
     email : String,
     password: String,
     number : Number ,
